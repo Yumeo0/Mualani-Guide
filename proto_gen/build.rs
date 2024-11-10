@@ -1,6 +1,7 @@
 use protobuf_codegen::Codegen;
 use std::fs;
 use std::path::PathBuf;
+use tracing::warn;
 
 fn main() {
     // Define paths
@@ -13,10 +14,19 @@ fn main() {
     // Create the output directory if it doesn't exist
     fs::create_dir_all(proto_out).expect("Failed to create output directory");
 
+    let proto_files = get_proto_files(proto_src);
+    if proto_files.len() == 0 {
+        warn!(
+            "Skipping protobuf generation: no .proto files found in {}",
+            proto_src
+        );
+        return;
+    }
+
     // Generate Rust files from .proto
     Codegen::new()
         .out_dir(proto_out)
-        .inputs(&get_proto_files(proto_src))
+        .inputs(&proto_files)
         .includes(&[proto_src])
         .run()
         .expect("Failed to generate protobuf Rust files");
