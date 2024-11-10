@@ -4,12 +4,32 @@ import { Event, listen } from '@tauri-apps/api/event';
 
 function App() {
 
-  listen('player_token_rsp', (event: Event<string>) => {
-    console.log('Received PlayerTokenRsp:', event.payload);
-  });
+  const events = [
+    'achievement_notify',
+    //'achievement_update_notify',
+    'api_key_notify',
+    'avatar_fight_prop_update',
+    'avatar_notify',
+    'avatar_property_update',
+    'friend_init',
+    'player_info',
+    'player_token_rsp',
+    'player_update',
+    'quest_notify',
+    'scene_entity_die_update',
+    'scene_update',
+    'avatar_skill_update',
+    'store_notify',
+    'store_update',
+    'team_swap_notify',
+    'world_notify',
+  ];
 
-  listen('player_info', (event: Event<string>) => {
-    console.log('Received PlayerInfo:', event.payload);
+  events.forEach((event) => {
+    console.debug('Listening for', event);
+    listen(event, (event: Event<string>) => {
+      console.log('Received', event.event, ':', JSON.parse(event.payload));
+    });
   });
 
   return (

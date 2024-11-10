@@ -1,0 +1,3 @@
+[submodule "artifactarium"]
+	path = artifactarium
+	url = https://github.com/Yumeo0/artifactarium

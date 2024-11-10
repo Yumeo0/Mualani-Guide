@@ -71,7 +71,6 @@ checksum = "7c02d123df017efcdfbd739ef81735b36c5ba83ec3c59c80a9d7ecc718f92e50"
 [[package]]
 name = "artifactarium"
 version = "1.0.0"
-source = "git+https://github.com/juliuskreutz/artifactarium#f8b01982fe5828cdc4036d5a0bb01e35a406a03c"
 dependencies = [
  "base64 0.22.1",
  "etherparse",
@@ -2772,6 +2771,7 @@ dependencies = [
  "protobuf-codegen",
  "serde",
  "serde_json",
+ "tracing",
 ]
 
 [[package]]
