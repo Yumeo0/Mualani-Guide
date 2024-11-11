@@ -1,11 +1,12 @@
 use std::env;
+use std::path::PathBuf;
 use std::process::Command;
 
 fn main() {
     println!("cargo:rustc-link-search=native=C:\\Program Files\\Npcap\\Lib\\x64");
     tauri_build::build();
     if env::consts::OS == "linux" && env::var("CARGO_FEATURE_SETCAP").is_ok() {
-        let binary_path = "src-tauri/target/debug/mualani_guide";
+        let binary_path: PathBuf = ["target", &env::var("PROFILE").unwrap(), "mualani_guide"].iter().collect();
 
         let status = Command::new("sudo")
             .arg("setcap")
