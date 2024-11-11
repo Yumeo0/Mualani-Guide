@@ -1,5 +1,6 @@
 use protobuf_codegen::Codegen;
 use std::fs;
+use std::io;
 use std::path::PathBuf;
 use tracing::warn;
 
@@ -44,9 +45,12 @@ fn main() {
 }
 
 fn get_proto_files(proto_src: &str) -> Vec<PathBuf> {
-    fs::read_dir(proto_src)
-        .expect("Failed to read proto directory")
-        .filter_map(|entry| {
+    let read_dir = match fs::read_dir(proto_src) {
+        Err(err) if err.kind() == io::ErrorKind::NotFound => return vec![],
+        Err(err) => panic!("Failed to read proto directory. {}", err),
+        Ok(read_dir) => read_dir,
+    };
+    return read_dir.filter_map(|entry| {
             let path = entry.ok()?.path();
             if path.extension()?.to_str()? == "proto" {
                 Some(path)
