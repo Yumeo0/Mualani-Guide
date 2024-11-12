@@ -36,3 +36,4 @@ proto_gen = { path = "../proto_gen" }
 base64 = "0.22.1"
 regex = "1.11.1"
 crossbeam-channel = "0.5.12"
+tauri-plugin-fs = "2"

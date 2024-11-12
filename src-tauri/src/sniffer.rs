@@ -214,7 +214,7 @@ impl PacketSniffer {
 
 fn load_keys() -> anyhow::Result<HashMap<u16, Vec<u8>>> {
     let keys: HashMap<u16, String> =
-        serde_json::from_slice(include_bytes!("../../public/keys.json"))?;
+        serde_json::from_slice(include_bytes!("../resources/gi/keys.json"))?;
 
     let mut keys_bytes = HashMap::new();
 
