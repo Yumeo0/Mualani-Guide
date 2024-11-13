@@ -5,8 +5,8 @@
   "identifier": "mualani-guide.yumeo.dev",
   "build": {
     "beforeDevCommand": "yarn dev",
-    "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "yarn build",
+    "beforeBuildCommand": "yarn generate",
+    "devUrl": "http://localhost:3000",
     "frontendDist": "../dist"
   },
   "app": {
